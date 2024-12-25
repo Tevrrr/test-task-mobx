@@ -1,0 +1,115 @@
+.navbar {
+	position: fixed;
+	z-index: 20;
+	top: 0;
+	height: 72px;
+	width: 100%;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background: #3a3a3a;
+}
+
+.navbar__container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.navbar__logo {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	color: #fff;
+}
+
+.navbar__logo__text {
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 18.2px;
+	letter-spacing: -0.4px;
+	text-underline-position: from-font;
+	text-decoration-skip-ink: none;
+}
+
+.navbar__actions {
+	display: flex;
+	align-items: center;
+	gap: 34px;
+
+	color: #fff;
+}
+
+.actions__account_button {
+	width: 40px;
+	height: 40px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background: #ffffff14;
+	border-radius: 12px;
+	padding: 4px;
+}
+
+.actions__account_button__container {
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background: #ffffff5c;
+	border-radius: 8px;
+	padding: 6px;
+}
+
+.actions__favorite_button {
+	position: relative;
+	padding-top: 1px;
+	width: 32px;
+	height: 32px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	border-radius: 8px;
+
+	&.action {
+		background: #ffffff1f;
+	}
+}
+
+.actions__favorite_button_action {
+	background: #ffffff1f;
+}
+
+.actions__favorite_button.action {
+	background: #ffffff1f;
+}
+
+.actions__favorite_button__counter {
+	position: absolute;
+	top: -1px;
+	right: -4px;
+	width: 15px;
+	height: 15px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	padding: 2px 4px;
+	border-radius: 4px;
+	background: #d44333;
+
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 10.8px;
+	color: #fff;
+}

@@ -1,0 +1,12 @@
+.control_panel {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.control_panel__result {
+	font-size: 22px;
+	font-weight: 600;
+	line-height: 22px;
+	letter-spacing: -0.5px;
+}

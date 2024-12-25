@@ -1,0 +1,16 @@
+.back_button {
+	width: min-content;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 14px;
+	letter-spacing: -0.4px;
+
+	& > img {
+		width: 24px;
+		height: 24px;
+	}
+}

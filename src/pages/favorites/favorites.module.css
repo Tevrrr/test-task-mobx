@@ -1,0 +1,21 @@
+.main_container {
+	display: flex;
+	flex-direction: column;
+	gap: 48px;
+	padding-top: 24px;
+}
+
+/* table styles */
+
+.table_container {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.table__cards {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 24px;
+	padding-bottom: 24px;
+}
