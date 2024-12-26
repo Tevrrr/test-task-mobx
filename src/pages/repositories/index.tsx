@@ -33,8 +33,8 @@ const Repositories: FC = observer(() => {
 			const aValue = a[sort.target];
 			const bValue = b[sort.target];
 			if (typeof aValue === 'number' && typeof bValue === 'number') {
-				if (sort.order === 'asc') return bValue - aValue;
-				return aValue - bValue;
+				if (sort.order === 'asc') return aValue - bValue;
+				return bValue - aValue;
 			}
 			if (typeof aValue === 'string' && typeof bValue === 'string') {
 				if (sort.order === 'asc') return aValue.localeCompare(bValue);
