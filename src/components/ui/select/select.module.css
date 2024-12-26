@@ -31,6 +31,7 @@
 }
 
 .select__down_container {
+	z-index: 20;
 	position: absolute;
 	top: 100%;
 	left: 0;
@@ -50,6 +51,7 @@
 }
 
 .down_container__item {
+	cursor: pointer;
 	padding: 8px 16px;
 	transition: all 0.075s ease-in;
 	text-align: left;

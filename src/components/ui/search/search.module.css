@@ -1,3 +1,8 @@
+.search_container {
+	position: relative;
+	width: 100%;
+}
+
 .search_input {
 	width: 100%;
 	height: 48px;
@@ -11,5 +16,37 @@
 	line-height: 16px;
 	&::placeholder {
 		color: #3a3a3a52;
+	}
+}
+
+.select__down_container {
+	z-index: 20;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	margin-top: 8px;
+
+	max-height: 200px;
+	height: max-content;
+	overflow-x: hidden;
+	overflow-y: auto;
+
+	display: flex;
+	flex-direction: column;
+
+	background: #fff;
+	border-radius: 4px;
+}
+
+.down_container__item {
+	cursor: pointer;
+	padding: 8px 16px;
+	transition: all 0.075s ease-in;
+	text-align: left;
+
+	background: #0000;
+	&:hover {
+		background: #0001;
 	}
 }

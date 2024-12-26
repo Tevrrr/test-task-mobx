@@ -2,9 +2,7 @@ import { FC, useEffect, useRef, useState } from 'react';
 import style from './select.module.css';
 import downArrow from '../../../assets/svg/down.svg';
 
-interface SelectProps {}
-
-const Select: FC<SelectProps> = () => {
+const Select: FC = () => {
 	const selectRef = useRef<HTMLButtonElement | null>(null);
 	const [isOpen, setIsOpen] = useState(false);
 

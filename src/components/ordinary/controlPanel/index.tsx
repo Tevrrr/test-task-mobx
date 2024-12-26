@@ -2,14 +2,14 @@ import { FC } from 'react';
 import style from './controlPanel.module.css';
 import Select from '../../ui/select';
 
-interface ControlPanelProps {}
+interface ControlPanelProps {
+	title?: string;
+}
 
-const ControlPanel: FC<ControlPanelProps> = () => {
+const ControlPanel: FC<ControlPanelProps> = ({ title = 'Result' }) => {
 	return (
 		<div className={style.control_panel}>
-			<p className={style.control_panel__result}>
-				Result: 100 repositories
-			</p>
+			<p className={style.control_panel__result}>{title}</p>
 			<Select />
 		</div>
 	);

@@ -4,7 +4,7 @@ import style from '../repository.module.css';
 interface DataCardProps {
 	iconSrc: string;
 	iconAlt: string;
-	value: string;
+	value: string | number;
 	label: string;
 }
 
