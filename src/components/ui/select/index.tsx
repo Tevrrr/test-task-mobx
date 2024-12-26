@@ -26,7 +26,7 @@ const Select: FC = () => {
 			if (res) {
 				setTargetValue(res);
 			}
-		}
+		} else setTargetValue(null);
 	}, [sort]);
 
 	useEffect(() => {
