@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import style from './select.module.css';
 import downArrow from '../../../assets/svg/down.svg';
 import { SORTS } from '../../../consts/sorts';
@@ -9,12 +9,25 @@ const Select: FC = () => {
 	const selectRef = useRef<HTMLButtonElement | null>(null);
 	const [isOpen, setIsOpen] = useState(false);
 	const [targetValue, setTargetValue] = useState<Sort | null>(null);
-	const { setSort } = useSort();
+	const { setSort, sort } = useSort();
 
 	const onChangeHandler = (sort: Sort) => () => {
 		setTargetValue(sort);
 		setSort(sort.value);
 	};
+
+	useLayoutEffect(() => {
+		if (sort) {
+			const res = SORTS.find(
+				(item) =>
+					item.value.order === sort.order &&
+					item.value.target === sort.target
+			);
+			if (res) {
+				setTargetValue(res);
+			}
+		}
+	}, []);
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {

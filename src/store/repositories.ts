@@ -24,6 +24,7 @@ class Repositories {
 				'RepositoriesStore.uploadData: query не может быть пустым!'
 			);
 			this.data = [];
+			this.loadingState = 'idle';
 			return;
 		}
 		this.loadingState = 'pending';

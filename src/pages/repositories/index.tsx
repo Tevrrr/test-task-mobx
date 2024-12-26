@@ -58,7 +58,14 @@ const Repositories: FC = observer(() => {
 				{RepositoriesStore.loadingState === 'error' && (
 					<div>
 						<h3>Error!</h3>
+
 						<code>{JSON.stringify(RepositoriesStore.isError)}</code>
+					</div>
+				)}
+
+				{!search && RepositoriesStore.loadingState === 'idle' && (
+					<div>
+						<h3>Укажите запрос в поисковой строке!</h3>
 					</div>
 				)}
 			</div>
