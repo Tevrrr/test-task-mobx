@@ -1,10 +1,20 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import style from './select.module.css';
 import downArrow from '../../../assets/svg/down.svg';
+import { SORTS } from '../../../consts/sorts';
+import { Sort } from '../../../types/interfaces/sort';
+import { useSort } from '../../../hook/useSort';
 
 const Select: FC = () => {
 	const selectRef = useRef<HTMLButtonElement | null>(null);
 	const [isOpen, setIsOpen] = useState(false);
+	const [targetValue, setTargetValue] = useState<Sort | null>(null);
+	const { setSort } = useSort();
+
+	const onChangeHandler = (sort: Sort) => () => {
+		setTargetValue(sort);
+		setSort(sort.value);
+	};
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -28,7 +38,7 @@ const Select: FC = () => {
 			ref={selectRef}
 			onClick={() => setIsOpen(!isOpen)}
 			className={style.select}>
-			<p>New first</p>
+			<p>{targetValue ? targetValue.title : 'Выберите сортировку'}</p>
 			<img
 				className={
 					isOpen ? style.select__arrow_open : style.select__arrow
@@ -38,12 +48,13 @@ const Select: FC = () => {
 			/>
 			{isOpen && (
 				<div className={style.select__down_container}>
-					<div className={style.down_container__item}>aaa</div>
-					<div className={style.down_container__item}>aaa</div>
-					<div className={style.down_container__item}>aaa</div>
-					<div className={style.down_container__item}>aaa</div>
-					<div className={style.down_container__item}>aaa</div>
-					<div className={style.down_container__item}>aaa</div>
+					{SORTS.map((item) => (
+						<button
+							onClick={onChangeHandler(item)}
+							className={style.down_container__item}>
+							{item.title}
+						</button>
+					))}
 				</div>
 			)}
 		</button>

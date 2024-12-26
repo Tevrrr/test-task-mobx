@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import style from './repositories.module.css';
 import Wrapper from '../../components/layouts/wrapper';
 import Search from '../../components/ui/search';
@@ -6,15 +6,44 @@ import Table from './components/table';
 import { observer } from 'mobx-react-lite';
 import { RepositoriesStore } from '../../store/repositories';
 import { useSearch } from '../../hook/useSearch';
+import { useSort } from '../../hook/useSort';
 
 const Repositories: FC = observer(() => {
 	const { search } = useSearch();
+	const { sort } = useSort();
 
 	useEffect(() => {
 		if (RepositoriesStore.loadingState !== 'pending') {
 			RepositoriesStore.uploadData(search || '');
 		}
 	}, [search]);
+
+	const sortData = useMemo(() => {
+		if (!sort || !RepositoriesStore.data) {
+			return RepositoriesStore.data;
+		}
+
+		if (
+			typeof RepositoriesStore.data[0][sort.target] === 'undefined' ||
+			typeof RepositoriesStore.data[0][sort.target] === 'undefined'
+		)
+			return RepositoriesStore.data;
+
+		return [...RepositoriesStore.data].sort((a, b) => {
+			const aValue = a[sort.target];
+			const bValue = b[sort.target];
+			if (typeof aValue === 'number' && typeof bValue === 'number') {
+				if (sort.order === 'asc') return bValue - aValue;
+				return aValue - bValue;
+			}
+			if (typeof aValue === 'string' && typeof bValue === 'string') {
+				if (sort.order === 'asc') return aValue.localeCompare(bValue);
+				return bValue.localeCompare(aValue);
+			}
+			return 0;
+		});
+	}, [RepositoriesStore.data, sort]);
+
 	return (
 		<Wrapper>
 			<div className={'container-center ' + style.main_container}>
@@ -22,7 +51,7 @@ const Repositories: FC = observer(() => {
 				{RepositoriesStore.loadingState === 'pending' && 'Loading...'}
 				{RepositoriesStore.loadingState === 'success' && (
 					<Table
-						data={RepositoriesStore.data}
+						data={sortData}
 						totalCount={RepositoriesStore.totalCount}
 					/>
 				)}
