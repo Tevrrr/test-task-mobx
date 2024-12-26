@@ -27,7 +27,7 @@ const Select: FC = () => {
 				setTargetValue(res);
 			}
 		}
-	}, []);
+	}, [sort]);
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
