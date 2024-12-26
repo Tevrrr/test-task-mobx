@@ -21,7 +21,7 @@ const Search: FC = () => {
 	useOutsideClick(searchRef, isOpen, () => setIsOpen(false));
 	useThrottle(
 		() => {
-			setSearch(searchValue);
+			if (search !== searchValue) setSearch(searchValue);
 			if (!searchValue) {
 				setHints([]);
 			}

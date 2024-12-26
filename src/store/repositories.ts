@@ -6,11 +6,7 @@ import { LoadingState } from '../types/types/loadingState';
 interface CacheData {
 	data: Repository[];
 	totalCount: number;
-	cachingTime?: number;
-	cachingKey?: string;
 }
-
-const CACHE_LIFETYME: number = 5000;
 
 class Repositories {
 	data: null | Repository[] = null;
@@ -27,23 +23,8 @@ class Repositories {
 			console.error(
 				'RepositoriesStore.uploadData: query не может быть пустым!'
 			);
+			this.data = [];
 			return;
-		}
-		const cache = this.getByCache();
-		if (cache) {
-			const { cachingKey, cachingTime, data, totalCount } = cache;
-			console.log(cachingKey === query);
-			if (
-				cachingKey === query &&
-				cachingTime &&
-				cachingTime - new Date().getMilliseconds() < CACHE_LIFETYME
-			) {
-				this.data = data;
-				this.isError = null;
-				this.totalCount = totalCount;
-				this.loadingState = 'success';
-				return;
-			}
 		}
 		this.loadingState = 'pending';
 		getRepositories({ query }).then((result) => {
@@ -65,8 +46,6 @@ class Repositories {
 				JSON.stringify({
 					data: items,
 					totalCount: total_count,
-					cachingTime: new Date().getMilliseconds(),
-					cachingKey: query || '',
 				} as CacheData)
 			);
 		});

@@ -9,6 +9,7 @@ import terminalIcon from '../../../assets/svg/terminal.svg';
 import folderIcon from '../../../assets/svg/folder.svg';
 import editIcon from '../../../assets/svg/edit.svg';
 import heartIcon from '../../../assets/svg/heart.svg';
+import heartAddIcon from '../../../assets/svg/heart-add.svg';
 import linkIcon from '../../../assets/svg/link.svg';
 import DataCard from './components/dataCard';
 import { ROUTES } from '../../../consts/routes';
@@ -17,10 +18,30 @@ import { Repository } from '../../../types/interfaces/repository';
 import { RepositoriesStore } from '../../../store/repositories';
 import { observer } from 'mobx-react-lite';
 import { formatDate } from '../../../helpers/formatDate';
+import { FavoritesStore } from '../../../store/favorites';
+import { useCopy } from '../../../hook/useCopy';
 
 const RepositoryID: FC = observer(() => {
 	const { id } = useParams<{ id: string }>();
 	const [data, setData] = useState<Repository | null>(null);
+	const { isCopied, onCopy } = useCopy();
+
+	const onCopyHandler = async () => {
+		if (!data) return;
+
+		onCopy(data.svn_url);
+	};
+	const clickFavoriteHandler = () => {
+		if (!data) return;
+		if (FavoritesStore.favorites.some((item) => item.id === data.id)) {
+			console.log('del');
+			FavoritesStore.delRepository(data.id);
+		} else {
+			console.log('add');
+
+			FavoritesStore.addRepository(data);
+		}
+	};
 
 	useLayoutEffect(() => {
 		if (!data && id) {
@@ -108,16 +129,29 @@ const RepositoryID: FC = observer(() => {
 								className={
 									style.content_container__actions__buttons
 								}>
-								<button>
+								<button
+									className={`${isCopied && style.copied}`}
+									onClick={onCopyHandler}>
 									<img src={linkIcon} alt='link icon' />
 								</button>
-								<button>
-									<img src={heartIcon} alt='heart icon' />
+								<button onClick={clickFavoriteHandler}>
+									{FavoritesStore.favorites.some(
+										(item) => item.id === data.id
+									) ? (
+										<img
+											src={heartAddIcon}
+											alt='heart add icon'
+										/>
+									) : (
+										<img src={heartIcon} alt='heart icon' />
+									)}
 								</button>
 							</div>
-							<div className={style.actions__button_open}>
+							<a
+								href={data.svn_url}
+								className={style.actions__button_open}>
 								Открыть репотизторий
-							</div>
+							</a>
 						</div>
 					</div>
 				) : (

@@ -9,11 +9,10 @@ import { useSearch } from '../../hook/useSearch';
 
 const Repositories: FC = observer(() => {
 	const { search } = useSearch();
+
 	useEffect(() => {
-		if (RepositoriesStore.loadingState === 'idle') {
-			if (search) {
-				RepositoriesStore.uploadData(search);
-			} else RepositoriesStore.uploadData('');
+		if (RepositoriesStore.loadingState !== 'pending') {
+			RepositoriesStore.uploadData(search || '');
 		}
 	}, [search]);
 	return (

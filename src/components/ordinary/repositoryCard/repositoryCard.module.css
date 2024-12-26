@@ -104,6 +104,13 @@
 
 		border-radius: 8px;
 		border: solid 1px #3a3a3a1f;
+
+		transition: all 0.1s ease-in;
+		transform: scale(1);
+	}
+	& > .copied {
+		transition: all 0.2s ease-in;
+		transform: scale(1.2);
 	}
 }
 
